@@ -187,6 +187,10 @@ while (!key2){
        hoek2 = 90+(boogtangens(Xwaarde/Ywaarde));
       Serial.println(hoek2);
     }
+  lcd.clear();
+  lcd.print("Benodigde hoek:");
+  lcd.setCursor(0,1);
+  lcd.print(hoek2);
   for (pos = 0; pos <= hoek2; pos += 1) { // goes from 180 degrees to 0 degrees
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15ms for the servo to reach the position
