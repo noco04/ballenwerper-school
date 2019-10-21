@@ -49,6 +49,7 @@ char keys[ROWS][COLS] = {
   {'7','8','9'},
   {'*','0','#'}
 };
+String Inputjes[] = {'1','2','3','4','5','6','7','8','9','0'};
 byte rowPins[ROWS] = {31, 33, 35, 37}; //connect to the row pinouts of the keypad
 byte colPins[COLS] = {39,41,43}; //connect to the column pinouts of the keypad
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
@@ -60,6 +61,8 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 Servo myservo;
 int pos = 0;
+
+int TIP120pin = 11;
 
 float Xinputwaarde = 0;
 float Yinputwaarde = 0;
@@ -82,7 +85,7 @@ void setup ()
   lcd.begin(16, 2);
   myservo.attach(7);
   
-
+pinMode(TIP120pin, OUTPUT);
 }
 void loop ()
 
@@ -111,17 +114,11 @@ while (!key){
     }
   lcd.setCursor(14, 0);
   lcd.print(key);
-  
-  if (key == '1'){Xinputwaarde = -4.50;};
-  if (key == '2'){Xinputwaarde = -3.50;};
-  if (key == '3'){Xinputwaarde = -2.50;};
-  if (key == '4'){Xinputwaarde = -1.50;};
-  if (key == '5'){Xinputwaarde = -0.5;};
-  if (key == '6'){Xinputwaarde = 0.50;};
-  if (key == '7'){Xinputwaarde = 1.50;};
-  if (key == '8'){Xinputwaarde = 2.50;};
-  if (key == '9'){Xinputwaarde = 3.50;};
-  if (key == '0'){Xinputwaarde = 4.50;};
+  for (i = 0; i < 10; i++) {
+      if (key2 == Inputjes[i]){
+          Yinputwaarde = i-5;
+      }
+  }  
   Serial.println(Xinputwaarde);
   lcd.setCursor(0, 1);
   lcd.print(Xinputwaarde);
@@ -144,17 +141,11 @@ while (!key2){
     }
   lcd.setCursor(14, 0);
   lcd.print(key2);
-
-  if (key2 == '1'){Yinputwaarde = 0.50;};
-  if (key2 == '2'){Yinputwaarde = 1.50;};
-  if (key2 == '3'){Yinputwaarde = 2.50;};
-  if (key2 == '4'){Yinputwaarde = 3.50;};
-  if (key2 == '5'){Yinputwaarde = 4.50;};
-  if (key2 == '6'){Yinputwaarde = 5.50;};
-  if (key2 == '7'){Yinputwaarde = 6.50;};
-  if (key2 == '8'){Yinputwaarde = 7.50;};
-  if (key2 == '9'){Yinputwaarde = 8.50;};
-  if (key2 == '0'){Yinputwaarde = 9.50;};
+  for (i = 0; i < 10; i++) {
+      if (key2 == Inputjes[i]){
+          Yinputwaarde = i+0.50;
+      }
+  }
   Serial.println(Yinputwaarde);
   lcd.setCursor(0, 1);
   lcd.print(Yinputwaarde);
